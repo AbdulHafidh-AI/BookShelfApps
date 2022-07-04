@@ -210,13 +210,13 @@ const createBtn = (classType, isFinished, eventListener) => {
 	button.classList.add('btn', classType);
 
 	if (isFinished) {
-		button.innerText = `Unfinished`;
+		button.innerText = `Belum Siap`;
 	} else {
-		button.innerText = `Finished`;
+		button.innerText = `Sudah Siap`;
 	}
 
 	if (classType == 'remove-btn') {
-		button.innerText = `Remove`;
+		button.innerText = `Hapus`;
 	}
 
 	button.addEventListener('click', (event) => {
@@ -271,7 +271,7 @@ const removeBook = (bookElement) => {
 		text: "Anda tidak dapat mengembalikan ini",
 		icon: 'warning',
 		showCancelButton: true,
-		confirmButtonText: 'Delete Book',
+		confirmButtonText: 'Hapus Buku',
 		buttonsStyling: false,
 		reverseButtons: true,
 		customClass: {
@@ -281,8 +281,8 @@ const removeBook = (bookElement) => {
 	}).then((result) => {
 		if (result.isConfirmed) {
 			Swal.fire({
-				title: 'Deleted!',
-				text: 'Book deleted from the shelf!',
+				title: 'Hapus!',
+				text: 'Buku telah dihapus di rak ini!',
 				icon: 'success',
 				confirmButtonText: 'OK',
 				buttonsStyling: false,
