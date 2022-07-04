@@ -1,4 +1,11 @@
-
+footer {
+	color: rgb(255, 255, 255);
+	background-image: url('../img/banner.jpg');
+	background-size: cover;
+	text-align: center;
+	padding: 10px;
+	
+ }
 
 * {
 	margin: 0;
@@ -57,12 +64,12 @@ a:hover {
 /* #### NAVBAR #### */
 .navbar {
 	width: 100%;
-	background-color: aqua;
+	background-image: url('../img/banner.jpg');
 }
 
 .navbar-brand h1 {
 	font-size: 1.8rem;
-	color: var(--yellow);
+	color: white;
 }
 
 /* #### ADD BOOK #### */

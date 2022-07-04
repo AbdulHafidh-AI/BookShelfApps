@@ -1,6 +1,11 @@
 const STORAGE_KEY = 'BOOKS';
 let books = [];
 
+
+/**
+ * Mengambalikan nilai boolean tergantung apakah browser menyimpan data di local storage atau tidak
+ * @returns {HTMLElement}
+ */
 const isStorageExist = () => {
 	if (typeof Storage === undefined) {
 		alert('Browser tidak mendukung web storage');
@@ -10,13 +15,18 @@ const isStorageExist = () => {
 	return true;
 };
 
+/**
+ * Menympimpan data book ke local storage
+ */
 const saveBookData = () => {
 	const parsed = JSON.stringify(books);
 	localStorage.setItem(STORAGE_KEY, parsed);
 
 	document.dispatchEvent(new Event('ondatasaved'));
 };
-
+/**
+ * memuat data book dari local storage
+ */
 const loadStorageData = () => {
 	const serializedData = localStorage.getItem(STORAGE_KEY);
 	let data = JSON.parse(serializedData);
@@ -28,10 +38,21 @@ const loadStorageData = () => {
 	}
 };
 
+/**
+ * update data book ke local storage
+ */
 const updateStorageData = () => {
 	if (isStorageExist()) saveBookData();
 };
 
+/**
+ * Data Buku
+ * @param {*} title 
+ * @param {*} author 
+ * @param {*} publishedYear 
+ * @param {*} isFinished 
+ * @returns 
+ */
 function composeBookObject(title, author, publishedYear, isFinished) {
 	return {
 		id: +new Date(),
@@ -41,6 +62,11 @@ function composeBookObject(title, author, publishedYear, isFinished) {
 		isFinished,
 	};
 }
+/**
+ * Sebuah function untuk mencari buku berdasarkan id
+ * @param {*} bookId 
+ * @returns 
+ */
 
 const findBook = (bookId) => {
 	for (book of books) {
@@ -49,7 +75,11 @@ const findBook = (bookId) => {
 
 	return null;
 };
-
+/**
+ * Sebuah function untuk mencari buku berdasarkan index
+ * @param {*} bookId 
+ * @returns 
+ */
 const findBookIndex = (bookId) => {
 	let index = 0;
 	for (book of books) {
@@ -60,7 +90,9 @@ const findBookIndex = (bookId) => {
 
 	return -1;
 };
-
+/**
+ * Sebuah buku untuk merefresh list buku
+ */
 const refreshDataFromBooks = () => {
 	for (book of books) {
 		const newBook = makeBook(book.title, book.author, book.publishedYear, book.isFinished);
@@ -73,7 +105,10 @@ const refreshDataFromBooks = () => {
 		}
 	}
 };
-
+/**
+ * Sebuah function untuk mencari buku berdasarkan judul buku
+ * @param {} bookTitle 
+ */
 const searchBooks = (bookTitle) => {
 	books.filter((book) => {
 		if (book.title.toLowerCase().match(bookTitle.value.toLowerCase())) {
@@ -223,12 +258,17 @@ const moveToUnfinished = (bookElement) => {
 	updateStorageData();
 };
 
+/**
+ * Sebuah function untuk menampilkan pop up
+ * @param {*} bookElement 
+ */
+
 const removeBook = (bookElement) => {
 	const bookPosition = findBookIndex(bookElement[BOOK_ITEMID]);
 
 	Swal.fire({
-		title: 'Are you sure?',
-		text: "You won't be able to revert this!",
+		title: 'Apakah anda yakin?',
+		text: "Anda tidak dapat mengembalikan ini",
 		icon: 'warning',
 		showCancelButton: true,
 		confirmButtonText: 'Delete Book',
